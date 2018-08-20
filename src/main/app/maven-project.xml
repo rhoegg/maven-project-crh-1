@@ -16,6 +16,7 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
     </spring:beans>
     <db:derby-config name="Derby_Configuration" url="jdbc:derby:memory:muleEmbeddedDB;create=true" doc:name="Derby Configuration"/>
     <jms:activemq-connector name="Active_MQ" brokerURL="vm://localhost" validateConnections="true" doc:name="Active MQ"/>
+    
     <flow name="mavenFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/hello" doc:name="/hello"/>
         <set-payload value="Hello Maven" doc:name="Hello Response"/>
