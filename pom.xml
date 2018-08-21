@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mulesoft.training</groupId>
-	<artifactId>maven-project</artifactId>
+	<artifactId>maven-project-crh-1</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule</packaging>
 	<name>Mule maven-project Application</name>
@@ -16,6 +17,8 @@
 		<mule.tools.version>1.2</mule.tools.version>
 		<derby.version>10.14.2.0</derby.version>
 		<activemq.version>5.13.4</activemq.version>
+		<uid>rhoegg04</uid>
+		<pwd></pwd>
 	</properties>
 
 	<build>
@@ -28,6 +31,29 @@
 				<configuration>
 					<copyToAppsDirectory>true</copyToAppsDirectory>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+					<deploymentType>cloudhub</deploymentType>
+					<muleVersion>${mule.version}</muleVersion>
+					<username>${uid}</username>
+					<password>${pwd}</password>
+					<workerType>Micro</workerType>
+					<redeploy>true</redeploy>
+					<environment>Sandbox</environment>
+				</configuration>
+				<executions>
+					<execution>
+						<id>deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -135,13 +161,11 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-broker</artifactId>
 			<version>${activemq.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-kahadb-store</artifactId>
 			<version>${activemq.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<!-- for testing -->
@@ -181,13 +205,13 @@
 			<version>${mule.version}</version>
 			<scope>provided</scope>
 		</dependency>
-	<dependency>
-            <groupId>com.mulesoft.weave</groupId>
-            <artifactId>mule-plugin-weave</artifactId>
-            <version>${mule.version}</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>com.mulesoft.weave</groupId>
+			<artifactId>mule-plugin-weave</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 	<repositories>
 		<repository>
